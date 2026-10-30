@@ -113,6 +113,20 @@
         </p>
       </section>
 
+      <section class="fade-in delay-1">
+        <h2 class="section-title">Watch the trailer</h2>
+        <div class="video-frame" id="trailer">
+          <button type="button" class="video-play" id="trailer-play" aria-label="Play the MissAlien trailer">
+            <span class="video-play-icon" aria-hidden="true">&#9654;</span>
+            <span>Play trailer</span>
+          </button>
+        </div>
+        <p class="video-note">
+          The video is loaded from YouTube only after you click play.
+          <a href="https://youtu.be/YPj77PlY7tE" target="_blank" rel="noopener noreferrer">Open on YouTube</a>
+        </p>
+      </section>
+
       <section class="fade-in delay-2">
         <h2 class="section-title">How does it work?</h2>
         <div class="flow-grid">
@@ -139,29 +153,6 @@
         </div>
       </section>
 
-      <section class="fade-in delay-2">
-        <h2 class="section-title">How does it look?</h2>
-        <div class="shots-grid">
-          <figure class="shot" data-fallback="Screenshot missing">
-            <img src="assets/screenshots/missalien/missalien_01.jpg" alt="MissAlien gameplay screenshot 1" loading="lazy" />
-          </figure>
-          <figure class="shot" data-fallback="Screenshot missing">
-            <img src="assets/screenshots/missalien/missalien_02.jpg" alt="MissAlien gameplay screenshot 2" loading="lazy" />
-          </figure>
-          <figure class="shot" data-fallback="Screenshot missing">
-            <img src="assets/screenshots/missalien/missalien_03.jpg" alt="MissAlien gameplay screenshot 3" loading="lazy" />
-          </figure>
-          <figure class="shot" data-fallback="Screenshot missing">
-            <img src="assets/screenshots/missalien/missalien_04.jpg" alt="MissAlien gameplay screenshot 4" loading="lazy" />
-          </figure>
-          <figure class="shot" data-fallback="Screenshot missing">
-            <img src="assets/screenshots/missalien/missalien_05.jpg" alt="MissAlien gameplay screenshot 5" loading="lazy" />
-          </figure>
-          <figure class="shot" data-fallback="Screenshot missing">
-            <img src="assets/screenshots/missalien/missalien_06.jpg" alt="MissAlien gameplay screenshot 6" loading="lazy" />
-          </figure>
-        </div>
-      </section>
 
       <section class="fade-in delay-3">
         <h2 class="section-title">Core Features</h2>
@@ -196,16 +187,15 @@
     </main>
 
     <script>
-      document.querySelectorAll('.shot img').forEach((img) => {
-        img.addEventListener('error', () => {
-          const box = img.closest('.shot');
-          if (!box) return;
-          box.classList.add('missing');
-          const text = document.createElement('div');
-          text.textContent = box.dataset.fallback || 'Screenshot missing';
-          img.remove();
-          box.appendChild(text);
-        });
+      document.getElementById('trailer-play').addEventListener('click', () => {
+        const box = document.getElementById('trailer');
+        const frame = document.createElement('iframe');
+        frame.src = 'https://www.youtube-nocookie.com/embed/YPj77PlY7tE?autoplay=1&rel=0';
+        frame.title = 'MissAlien trailer';
+        frame.allow = 'autoplay; encrypted-media; picture-in-picture';
+        frame.allowFullscreen = true;
+        frame.referrerPolicy = 'strict-origin-when-cross-origin';
+        box.replaceChildren(frame);
       });
     </script>
   </body>
